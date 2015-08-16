@@ -26,7 +26,7 @@ namespace ImgCheck
             InitializeComponent();
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void btnOpenFile_Click(object sender, RoutedEventArgs e)
         {
             // Create OpenFileDialog 
             Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
@@ -43,71 +43,55 @@ namespace ImgCheck
             {
                 // Open document 
                 string filename = dlg.FileName;
-                TextBox1.Text = filename;
+                txtFilePath.Text = filename;
             }
         }
 
-        private void Button_Click_2(object sender, RoutedEventArgs e)
+        private void btnAnalysis_Click(object sender, RoutedEventArgs e)
         {            
-            Bitmap originbmp = new Bitmap(TextBox1.Text);
+            Bitmap originbmp = new Bitmap(txtFilePath.Text);
 
-////            var px = originbmp.GetPixel(originbmp.Width / 2, originbmp.Height / 2);
+            imgShow.Source = new BitmapImage(new Uri(txtFilePath.Text));
 
-////            TextBlock1.Text = string.Format(@"
-////Width : {0}
-////Height : {1}
-////ARGB : {2}
-////A : {3}
-////R : {4}
-////G : {5}
-////B : {6}
-////", originbmp.Width, originbmp.Height, px.ToArgb(), px.A, px.R, px.G, px.B);
-
-
-
-            var dic = new Dictionary<string, int>();
+            var dicColor = new Dictionary<string, ColorData>();
             for (int i = 0; i < originbmp.Width; i++)
             {
                 for (int j = 0; j < originbmp.Height; j++)
                 {
-                    var p = originbmp.GetPixel(i,j);
-                    var key = string.Format("A:{0} R:{1} G:{2} B:{3}",p.A, p.R, p.G, p.B);
-                    if (dic.Keys.Contains(key)) {
-                        dic[key] = dic[key] + 1;
+                    var pxColor = (ColorRGB)originbmp.GetPixel(i,j);
+                    var colorData = new ColorData(pxColor);
+
+                    if (dicColor.Keys.Contains(colorData.HLSString))
+                    {
+                        dicColor[colorData.HLSString].Count += 1;
                     }
                     else
                     {
-                        dic.Add(key, 1);
+                        dicColor.Add(colorData.HLSString, colorData);
                     }
                 }
             }
 
-            TextBlock1.Text = string.Format(@"Dic Keys Count : {0}", dic.Keys.Count);
+            var result = string.Format(@"Dic Keys Count : {0}", dicColor.Count);
+            txtResult.Text = result;
 
+            var listColow = dicColor.Values.OrderByDescending(d => d.Count).ToList();
+            listResult.ItemsSource = listColow;
 
+            originbmp.Dispose();
+        }
 
-
-            int w = 510;
-            int h = 510;
-            Bitmap resizedbmp = new Bitmap(w, h);
-
-            Graphics g = Graphics.FromImage(resizedbmp);
-            //g.DrawImage(originbmp, new System.Drawing.Rectangle(0, 0, w, h), new System.Drawing.Rectangle(0, 0, originbmp.Width, originbmp.Height), GraphicsUnit.Pixel);
-
-            for (int i = 0; i < 256; i++)
+        private void ListViewItem_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            var item = sender as ListBoxItem;
+            if (item != null && item.IsSelected)
             {
-                for (int j = 0; j > 256; j--)
-                {
-                    resizedbmp.SetPixel(i, j, System.Drawing.Color.FromArgb(px.R, px.G, 0));
+                var colorData = item.Content as ColorData;
+                if (colorData != null) {
+                    var z = (System.Drawing.Color)colorData.MyColor;
+                    labelShowColor.Background = (System.Windows.Media.Brush)new BrushConverter().ConvertFromString("#"+z.Name); ;
                 }
             }
-
-            //resizedbmp.Save("b.jpg");
-
-            g.Dispose();
-            resizedbmp.Dispose();
-            originbmp.Dispose();
-
         }
     }
 }

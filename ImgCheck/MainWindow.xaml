@@ -3,10 +3,27 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="189,11,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_1"/>
-        <TextBox x:Name="TextBox1" HorizontalAlignment="Left" Height="23" Margin="10,10,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="174" />
-        <Button Content="Button" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="10,44,0,0" Click="Button_Click_2"/>
-        <TextBlock x:Name="TextBlock1" HorizontalAlignment="Left" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Margin="10,85,0,0" Height="225" Width="497"/>
-
+        <Button x:Name="btnGetFile" Content="OpenFile" HorizontalAlignment="Left" Margin="189,11,0,0" VerticalAlignment="Top" Width="75" Click="btnOpenFile_Click"/>
+        <TextBox x:Name="txtFilePath" HorizontalAlignment="Left" Height="23" Margin="10,10,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="174" />
+        <Button x:Name="btnAnalysis" Content="Analysis" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="10,44,0,0" Click="btnAnalysis_Click"/>
+        <TextBlock x:Name="txtResult" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Show Result" VerticalAlignment="Top" Margin="10,85,0,0" Height="21" Width="254"/>
+        <ListBox x:Name="listResult" HorizontalAlignment="Left" Height="204" Margin="10,106,0,0" VerticalAlignment="Top" Width="254">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding HLSString}" FontWeight="Bold"/>
+                        <TextBlock Text=" -> " />
+                        <TextBlock Foreground="Green" Text="{Binding Count}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <EventSetter Event="PreviewMouseLeftButtonUp"  Handler="ListViewItem_PreviewMouseLeftButtonUp" />
+                </Style>
+            </ListBox.ItemContainerStyle>
+        </ListBox>
+        <Label x:Name="labelShowColor" Content="" HorizontalAlignment="Left" Margin="269,160,0,0" VerticalAlignment="Top" Height="150" Width="238" Background="Black"/>
+        <Image x:Name="imgShow" HorizontalAlignment="Left" Height="145" Margin="269,10,0,0" VerticalAlignment="Top" Width="238"/>
     </Grid>
 </Window>

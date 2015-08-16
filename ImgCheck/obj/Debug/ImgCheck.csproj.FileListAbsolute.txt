@@ -14,3 +14,16 @@ C:\02. Code\06. ImgCheck\ImgCheck\ImgCheck\obj\Debug\ImgCheck.pdb
 C:\Git\新增資料夾 (2)\PracticeProject\ImgCheck\bin\Debug\ImgCheck.exe.config
 C:\Git\新增資料夾 (2)\PracticeProject\ImgCheck\obj\Debug\ImgCheck.exe
 C:\Git\新增資料夾 (2)\PracticeProject\ImgCheck\obj\Debug\ImgCheck.pdb
+C:\Git\PracticeProject\ImgCheck\bin\Debug\ImgCheck.exe.config
+C:\Git\PracticeProject\ImgCheck\obj\Debug\ImgCheck.exe
+C:\Git\PracticeProject\ImgCheck\obj\Debug\ImgCheck.pdb
+C:\Git\PracticeProject\ImgCheck\obj\Debug\ImgCheck.csprojResolveAssemblyReference.cache
+C:\Git\PracticeProject\ImgCheck\obj\Debug\MainWindow.baml
+C:\Git\PracticeProject\ImgCheck\obj\Debug\MainWindow.g.cs
+C:\Git\PracticeProject\ImgCheck\obj\Debug\App.g.cs
+C:\Git\PracticeProject\ImgCheck\obj\Debug\ImgCheck_MarkupCompile.cache
+C:\Git\PracticeProject\ImgCheck\obj\Debug\ImgCheck.g.resources
+C:\Git\PracticeProject\ImgCheck\obj\Debug\ImgCheck.Properties.Resources.resources
+C:\Git\PracticeProject\ImgCheck\obj\Debug\ImgCheck.csproj.GenerateResource.Cache
+C:\Git\PracticeProject\ImgCheck\bin\Debug\ImgCheck.exe
+C:\Git\PracticeProject\ImgCheck\bin\Debug\ImgCheck.pdb
